@@ -1,5 +1,5 @@
 // Define API key and URL for fetching exchange rates
-const apiKey = '1accb8b1188baf72e3f79ec8'; // API key
+const apiKey = 'Your_API_KEY'; // API key
 const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`; // API URL
 
 // Select HTML elements for interaction
