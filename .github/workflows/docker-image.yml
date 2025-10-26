@@ -9,22 +9,30 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write # Required to push to GHCR
+      packages: write
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+
+    # --- ADDED STEP ---
+    # This step gets the owner's name and converts it to lowercase
+    - name: Get lowercase owner name
+      id: owner_lowercase
+      run: echo "name=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
 
     - name: Log in to GitHub Container Registry
       uses: docker/login-action@v3
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }} # This is a special, secure secret
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
-        tags: ghcr.io/${{ github.repository_owner }}/currency-converter:latest
+        # --- MODIFIED LINE ---
+        # This now uses the lowercase name from the step above
+        tags: ghcr.io/${{ steps.owner_lowercase.outputs.name }}/currency-converter:latest
