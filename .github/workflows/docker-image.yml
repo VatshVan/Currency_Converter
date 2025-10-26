@@ -52,3 +52,8 @@ jobs:
         # This line is changed to use the tags from the 'meta' step
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+        
+        # --- THIS IS THE NEW LINE YOU NEED ---
+        # This securely passes your secret to the 'ARG API_KEY' in your Dockerfile
+        build-args: |
+          API_KEY=${{ secrets.API_KEY }}
