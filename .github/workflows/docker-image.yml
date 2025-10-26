@@ -1,25 +1,41 @@
 name: Build and Push Docker Image
 
+# This workflow now runs on two triggers:
+# 1. When you push a tag that starts with 'v' (like v1.0.0, v1.0.1)
+# 2. When you want to run it manually from the Actions tab (workflow_dispatch)
 on:
   push:
-    branches: [ "main" ] # Runs on push to main branch
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
+      packages: write # Required to push to GHCR
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # --- ADDED STEP ---
-    # This step gets the owner's name and converts it to lowercase
     - name: Get lowercase owner name
       id: owner_lowercase
       run: echo "name=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
+    # This action automatically extracts metadata and figures out the tags
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ghcr.io/${{ steps.owner_lowercase.outputs.name }}/currency-converter
+        # This tells the action to create two tags:
+        # 1. The Git tag (e.g., v1.0.1)
+        # 2. The 'latest' tag
+        tags: |
+          type=semver,pattern={{version}}
+          type=semver,pattern=latest
 
     - name: Log in to GitHub Container Registry
       uses: docker/login-action@v3
@@ -33,6 +49,6 @@ jobs:
       with:
         context: .
         push: true
-        # --- MODIFIED LINE ---
-        # This now uses the lowercase name from the step above
-        tags: ghcr.io/${{ steps.owner_lowercase.outputs.name }}/currency-converter:latest
+        # This line is changed to use the tags from the 'meta' step
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
