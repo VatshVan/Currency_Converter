@@ -67,5 +67,5 @@ currency-converter/
 ├── javascript.js
 ├── Dockerfile        # Container definition
 ├── .dockerignore     # Files to ignore in Docker build
-├── LICENSE           # MIT License
+├── LICENSE           # GNU License
 └── README.md
