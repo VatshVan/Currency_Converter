@@ -11,7 +11,6 @@ This is a simple currency converter web application that allows users to convert
 This project is deployed using GitHub Pages.
 
 **You can access the live version here: [https://vatshvan.github.io/Currency_Converter/](https://vatshvan.github.io/Currency_Converter/)**
-*(Note: You may need to rename `converter.html` to `index.html` for the link to work)*
 
 ## Features
 
@@ -62,7 +61,7 @@ currency-converter/
 │   └── workflows/
 │       ├── static.yml      # GitHub Pages deployment
 │       └── docker-image.yml # Docker build/push
-├── index.html        (or converter.html)
+├── index.html
 ├── style.css
 ├── javascript.js
 ├── Dockerfile        # Container definition
