@@ -31,13 +31,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
+      # --- ADD THIS STEP ---
+      # This finds 'Your_API_KEY' in the JS file and replaces it with your secret
+      - name: Inject API Key
+        run: |
+          sed -i "s|Your_API_KEY|${{ secrets.API_KEY }}|g" javascript.js
+      # ---------------------
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
+          # Upload entire repository (now with the modified javascript.js)
           path: '.'
+          
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
