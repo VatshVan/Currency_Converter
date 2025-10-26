@@ -3,6 +3,7 @@
 [![License: GPL v2](https://img.shields.io/badge/License-GPLv2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 [![Build and Push Docker Image](https://github.com/VatshVan/Currency_Converter/actions/workflows/docker-image.yml/badge.svg)](https://github.com/VatshVan/Currency_Converter/actions/workflows/docker-image.yml)
 [![GitHub Pages](https://img.shields.io/github/deployments/VatshVan/Currency_Converter/github-pages?label=GitHub%20Pages)](https://vatshvan.github.io/Currency_Converter/)
+[![GitHub release](https://img.shields.io/github/v/release/VatshVan/Currency_Converter.svg)](https://github.com/VatshVan/Currency_Converter/releases)
 
 This is a simple currency converter web application that allows users to convert amounts from one currency to another using real-time exchange rates fetched from an API.
 
