@@ -13,6 +13,8 @@ This project is deployed using GitHub Pages.
 
 **You can access the live version here: [https://vatshvan.github.io/Currency_Converter/](https://vatshvan.github.io/Currency_Converter/)**
 
+*(Note: The live demo uses a built-in API key. If you fork or clone this project, you will need to add your own key as described below.)*
+
 ## Features
 
 - Convert currency amounts between various currencies using real-time exchange rates.
@@ -23,9 +25,21 @@ This project is deployed using GitHub Pages.
 ## Technologies Used
 
 - **Frontend:** HTML, CSS, JavaScript
-- **API:** Exchange Rate API for real-time currency exchange rates.
+- **API:** [ExchangeRate-API](https://www.exchangerate-api.com/)
 - **Deployment:** GitHub Pages
 - **Containerization:** Docker
+
+## Configuration (Required for Local Use) 🔑
+
+This project requires a free API key to fetch exchange rates.
+
+1.  Go to [https://www.exchangerate-api.com/](https://www.exchangerate-api.com/) and sign up for a free API key.
+2.  Open the `javascript.js` file in the repository.
+3.  Find the following line:
+    ```javascript
+    const apiKey = 'Your_API_KEY'; // API key
+    ```
+4.  Replace `'Your_API_KEY'` with the actual API key you received.
 
 ## How to Use (Web Interface)
 
@@ -41,6 +55,8 @@ This project is deployed using GitHub Pages.
 ## How to Run Locally (with Docker 🐳)
 
 You can easily run this application locally using Docker.
+
+**Note:** Before building the Docker image, you must complete the **Configuration** steps above and add your API key to the `javascript.js` file.
 
 1.  **Build the Docker image:**
     ```bash
@@ -60,7 +76,7 @@ You can easily run this application locally using Docker.
 currency-converter/
 ├── .github/
 │   └── workflows/
-│       ├── static.yml      # GitHub Pages deployment
+│       ├── static.yml       # GitHub Pages deployment
 │       └── docker-image.yml # Docker build/push
 ├── index.html
 ├── style.css
